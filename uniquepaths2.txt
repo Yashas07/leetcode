@@ -1,0 +1,48 @@
+class Solution {
+    
+     static int recur(int r,int c,int m,int n,int [][] arr,int[][] obstacleGrid)
+    {
+        
+        if((r<m && c<n) &&  obstacleGrid[r][c]==0)
+        {
+            if(arr[r][c]!=-1)
+            {
+                return arr[r][c];
+            }
+        
+        
+            if(r==m-1 && c==n-1)
+            {
+                
+                return 1;
+            }
+        
+        
+     
+        // System.out.println(r+" "+c);
+            return arr[r][c] = recur( r+1,c,m,n,arr,obstacleGrid) + recur( r,c+1,m,n,arr,obstacleGrid);
+       
+        
+        }
+        
+        return 0;
+        
+            
+    }
+    
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int arr[][] = new int[m][n];
+        for(int i = 0;i<m;i++)
+        {
+            for(int j = 0;j<n;j++)
+            {
+                arr[i][j] = -1;
+            }
+        }
+        int ans = recur(0,0,m,n,arr,obstacleGrid);
+        return ans;
+    }
+}
